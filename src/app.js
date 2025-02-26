@@ -27,19 +27,38 @@ const execThreshold = process.env.EXEC_THRESHOLD || 1;
 
 const mask = (s, start, end) => s.split("").fill("*", start, end).join("");
 
+const buildTaskResult = (res, result) => {
+  const index = result.length;
+  if (res.errorCode === "User_Not_Chance") {
+    result.push(`第${index}次抽奖失败,次数不足`);
+  } else {
+    result.push(`第${index}次抽奖成功,抽奖获得${res.prizeName}`);
+  }
+};
+
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 // 任务 1.签到
 const doUserTask = async (cloudClient) => {
+  const result = [];
   const tasks = Array.from({ length: execThreshold }, () =>
     cloudClient.userSign()
   );
-  const result = (await Promise.all(tasks)).map(
+  const res1 = (await Promise.all(tasks)).map(
     (res) =>
       `个人任务${res.isSign ? "已经签到过了，" : ""}签到获得${
         res.netdiskBonus
       }M空间`
   );
+  await delay(5000); // 延迟5秒
+
+  const res2 = await cloudClient.taskSign();
+  buildTaskResult(res2, result);
+
+  await delay(5000); // 延迟5秒
+  const res3 = await cloudClient.taskPhoto();
+  buildTaskResult(res3, result);
+  
   return result;
 };
 
