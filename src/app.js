@@ -283,17 +283,27 @@ async function main() {
     const afterUserSizeInfo = await cloudClient.getUserSizeInfo();
     logger.log(`账户 ${userNameInfo}实际容量变化:`);
     logger.log(
-      `个人总容量增加：${(
+      `个人总容量：：${(
+            cloudCapacityInfo.totalSize /
+            1024 /
+            1024 /
+            1024
+          ).toFixed(2)}G（增加：${(
         (afterUserSizeInfo.cloudCapacityInfo.totalSize -
           userSizeInfo.cloudCapacityInfo.totalSize) /
         1024 /
         1024
-      ).toFixed(2)}M,家庭容量增加：${(
+      ).toFixed(2)}M）,家庭总容量：${(
+            familyCapacityInfo.totalSize /
+            1024 /
+            1024 /
+            1024
+          ).toFixed(2)}G（增加：${(
         (afterUserSizeInfo.familyCapacityInfo.totalSize -
           userSizeInfo.familyCapacityInfo.totalSize) /
         1024 /
         1024
-      ).toFixed(2)}M`
+      ).toFixed(2)}M）`
     );
   }
 }
