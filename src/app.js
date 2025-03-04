@@ -284,7 +284,7 @@ async function main() {
     logger.log(`账户 ${userNameInfo}实际容量变化:`);
     logger.log(
       `个人总容量：：${(
-            cloudCapacityInfo.totalSize /
+            afterUserSizeInfo.cloudCapacityInfo.totalSize /
             1024 /
             1024 /
             1024
@@ -294,7 +294,7 @@ async function main() {
         1024 /
         1024
       ).toFixed(2)}M）,家庭总容量：${(
-            familyCapacityInfo.totalSize /
+            afterUserSizeInfo.familyCapacityInfo.totalSize /
             1024 /
             1024 /
             1024
