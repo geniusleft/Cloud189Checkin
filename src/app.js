@@ -80,8 +80,9 @@ async function main() {
       `个人已用容量： ${(
         userSizeInfo.cloudCapacityInfo.usedSize /
         1024 /
+        1024 /
         1024
-      ).toFixed(2)}M/${(
+      ).toFixed(2)}G/${(
         afterUserSizeInfo.cloudCapacityInfo.totalSize /
         1024 /
         1024 /
@@ -90,8 +91,9 @@ async function main() {
       `家庭已用容量：${(
         userSizeInfo.familyCapacityInfo.usedSize /
         1024 /
+        1024 /
         1024
-      ).toFixed(2)}M/${(
+      ).toFixed(2)}G/${(
         afterUserSizeInfo.familyCapacityInfo.totalSize /
         1024 /
         1024 /
